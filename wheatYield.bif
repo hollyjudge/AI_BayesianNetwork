@@ -1,0 +1,72 @@
+network "unnamedBN" {
+// written by aGrUM 1.7.1
+}
+
+variable drought_resistance {
+   type discrete[2] {0, 1};
+}
+
+variable yield {
+   type discrete[2] {0, 1};
+}
+
+variable soil_quality {
+   type discrete[2] {0, 1};
+}
+
+variable soil_moisture {
+   type discrete[2] {0, 1};
+}
+
+variable temperature {
+   type discrete[2] {0, 1};
+}
+
+variable precipitation {
+   type discrete[2] {0, 1};
+}
+
+variable sunlight {
+   type discrete[2] {0, 1};
+}
+
+variable potassium {
+   type discrete[2] {0, 1};
+}
+
+probability (drought_resistance | potassium) {
+   (0) 0.546495 0.453505;
+   (1) 0.578466 0.421534;
+}
+probability (yield | drought_resistance, soil_quality) {
+   (0, 0) 0.431269 0.568731;
+   (1, 0) 0.979111 0.0208892;
+   (0, 1) 0.522485 0.477515;
+   (1, 1) 0.602627 0.397373;
+}
+probability (soil_quality | soil_moisture) {
+   (0) 0.242856 0.757144;
+   (1) 0.423511 0.576489;
+}
+probability (soil_moisture | temperature, precipitation) {
+   (0, 0) 0.581179 0.418821;
+   (1, 0) 0.628659 0.371341;
+   (0, 1) 0.448176 0.551824;
+   (1, 1) 0.186887 0.813113;
+}
+probability (temperature | precipitation, sunlight) {
+   (0, 0) 0.672043 0.327957;
+   (1, 0) 0.942454 0.0575463;
+   (0, 1) 0.228959 0.771041;
+   (1, 1) 0.350746 0.649254;
+}
+probability (precipitation) {
+   default 0.459194 0.540806;
+}
+probability (sunlight) {
+   default 0.0816551 0.918345;
+}
+probability (potassium) {
+   default 0.338039 0.661961;
+}
+
